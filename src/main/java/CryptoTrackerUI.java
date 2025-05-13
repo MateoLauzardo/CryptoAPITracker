@@ -5,15 +5,16 @@ import java.awt.*;
 
 public class CryptoTrackerUI {
 
+    //declaring variables
     private JLabel nameLabel;
     private JLabel priceLabel;
     private JLabel statusLabel;
     private JLabel marketCapLabel;
     private JLabel volumeLabel;
-
-    JFrame frame;
-    JPanel mainPanel;
-
+    private JFrame frame;
+    private JPanel mainPanel;
+    private JTextField searchField;
+    private JButton searchButton;
 
 
     public void FrameSetup(){
@@ -29,7 +30,6 @@ public class CryptoTrackerUI {
     }
 
 
-
     public void CreateCryptoIcon(){
 
         ImageIcon cryptoIcon = new ImageIcon("C:\\Users\\Mateo\\IdeaProjects\\CryptoTracker\\src\\cryptocurrency.png");
@@ -40,14 +40,7 @@ public class CryptoTrackerUI {
     }
 
 
-
-
-
-
-    public void createAndShowGUI() {
-
-        FrameSetup();
-        CreateCryptoIcon();
+    public void SearchPanelSetup(){
 
         // Search Panel
         JPanel searchPanel = new JPanel();
@@ -55,10 +48,10 @@ public class CryptoTrackerUI {
         searchPanel.setMaximumSize(new Dimension(280, 40));
         searchPanel.setBackground(Color.decode("#f2f2f2"));
 
-        JTextField searchField = new JTextField();
+        searchField = new JTextField();
         searchField.setFont(new Font("Arial", Font.PLAIN, 16));
 
-        JButton searchButton = new JButton("🔍");
+        searchButton = new JButton("🔍");
 
         searchPanel.add(searchField);
         searchPanel.add(searchButton);
@@ -66,6 +59,11 @@ public class CryptoTrackerUI {
         mainPanel.add(Box.createRigidArea(new Dimension(0, 20)));
         mainPanel.add(searchPanel);
         mainPanel.add(Box.createRigidArea(new Dimension(0, 20)));
+
+    }
+
+
+    public void CryptoInfoLabelsSetup(){
 
         // Crypto Info Labels
         nameLabel = new JLabel("Crypto Name");
@@ -85,6 +83,11 @@ public class CryptoTrackerUI {
         mainPanel.add(priceLabel);
         mainPanel.add(statusLabel);
         mainPanel.add(Box.createVerticalGlue());
+
+    }
+
+
+    public void InfoPanelSetup(){
 
         // Info Panel (Market Cap & Volume)
         JPanel infoPanel = new JPanel(new GridLayout(1, 2));
@@ -110,8 +113,10 @@ public class CryptoTrackerUI {
         mainPanel.add(infoPanel);
         mainPanel.add(Box.createRigidArea(new Dimension(0, 20)));
 
-//-------------------------------------------------------------------------------------------------
+    }
 
+
+    public void SearchButtonAction(){
 
         // Action: Search Button
         searchButton.addActionListener(e -> {
@@ -140,11 +145,20 @@ public class CryptoTrackerUI {
                 }
             }
         });
+    }
+
+
+
+    public void createAndShowGUI() {
+        FrameSetup();
+        CreateCryptoIcon();
+        SearchPanelSetup();
+        CryptoInfoLabelsSetup();
+        InfoPanelSetup();
+        SearchButtonAction();
 
         frame.setContentPane(mainPanel);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-
-
-    }//end of method
+    }
 }
